@@ -6,7 +6,9 @@ import { Public } from 'src/modules/auth/app/decorators/metadata';
 import { GetUserByUsernameUsecase } from 'src/modules/user/domain/usecases/get-user-by-username-usecase';
 import { RegisterUserUsecase } from 'src/modules/user/domain/usecases/register-user-usecase';
 import { RegisterUserDto } from '../../dtos/user-dto';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 
+@ApiTags('User / Public')
 @Controller('api/v1/user')
 export class UserController {
   constructor(
@@ -14,6 +16,7 @@ export class UserController {
     private readonly getUserByUsernameUsecase: GetUserByUsernameUsecase,
   ) {}
 
+  @ApiResponse({ type: Boolean })
   @Public()
   @Post('register')
   async register(@Body() body: RegisterUserDto, @Res() res: Response) {

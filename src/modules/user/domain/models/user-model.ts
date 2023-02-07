@@ -1,9 +1,22 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class UserModel {
+  @ApiProperty()
   public readonly id: string;
+
+  @ApiProperty()
   public readonly name: string;
+
+  @ApiProperty()
   public readonly username: string;
+
+  @ApiProperty()
   public readonly password: string;
+
+  @ApiProperty({ name: 'created_at' })
   public readonly createdAt: Date;
+
+  @ApiProperty({ name: 'updated_at' })
   public readonly updatedAt: Date;
 
   constructor(

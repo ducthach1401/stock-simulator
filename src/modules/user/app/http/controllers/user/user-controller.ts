@@ -24,7 +24,11 @@ import {
   UserIdParam,
   UserListQuery,
 } from '../../dtos/user-dto';
+import { ApiTags, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { UserModel } from 'src/modules/user/domain/models/user-model';
 
+@ApiTags('User / User')
+@ApiBearerAuth()
 @Controller('api/v1/user')
 export class UserController {
   constructor(
@@ -34,6 +38,7 @@ export class UserController {
     private readonly getUsersUsecase: GetUsersUsecase,
   ) {}
 
+  @ApiResponse({ type: UserModel })
   @Get('me')
   async getInfo(@Req() req: any, @Res() res: Response) {
     const result = await this.getUserUsecase.call(req.user.user_id, undefined);
@@ -47,6 +52,7 @@ export class UserController {
     res.status(HttpStatus.OK).json(result.toJson());
   }
 
+  @ApiResponse({ type: Boolean })
   @Put('update')
   async update(
     @Req() req: any,
@@ -66,6 +72,7 @@ export class UserController {
     res.status(HttpStatus.OK).json(true);
   }
 
+  @ApiResponse({ type: Boolean })
   @Put('update/password')
   async password(
     @Req() req: any,
@@ -85,6 +92,7 @@ export class UserController {
     res.status(HttpStatus.OK).json(true);
   }
 
+  @ApiResponse({ type: [UserModel] })
   @Get()
   async list(
     @Req() req: any,
@@ -108,6 +116,7 @@ export class UserController {
     res.status(HttpStatus.OK).json(users.map((user) => user.toJson()));
   }
 
+  @ApiResponse({ type: UserModel })
   @Get('id/:id')
   async get(
     @Req() req: any,

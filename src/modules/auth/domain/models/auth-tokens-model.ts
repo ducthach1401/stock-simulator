@@ -1,8 +1,18 @@
+import { ApiProperty } from '@nestjs/swagger';
 export class AuthTokensModel {
+  @ApiProperty()
   public readonly id: string;
+
+  @ApiProperty({ name: 'user_id' })
   public readonly userId: string;
+
+  @ApiProperty()
   public readonly token: string;
+
+  @ApiProperty({ name: 'created_at' })
   public readonly createdAt: Date;
+
+  @ApiProperty({ name: 'updated_at' })
   public readonly updatedAt: Date;
 
   constructor(

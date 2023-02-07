@@ -4,7 +4,7 @@ services:
   node:
     image: ${COMPOSE_PROJECT_NAME}/node:16-alpine
     build: images/node
-    command: /bin/sh -c "npm run start:debug"
+    command: /bin/sh -c "npm run migration:run && npm run start:debug"
     restart: on-failure
     ports:
       - '${HTTP_PORT}:80'

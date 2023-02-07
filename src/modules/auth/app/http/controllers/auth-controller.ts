@@ -15,7 +15,10 @@ import { GetUserUsecase } from 'src/modules/user/domain/usecases/get-user-usecas
 import { LogicalException } from 'src/exceptions/logical-exception';
 import { ErrorCode } from 'src/exceptions/error-code';
 import { DeleteAuthTokenUsecase } from 'src/modules/auth/domain/usecases/auth-token/delete-auth-token-usecase';
+import { ApiTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { TokenModel } from 'src/modules/auth/domain/models/token-model';
 
+@ApiTags('Auth')
 @Controller('api/v1/auth')
 export class AuthController {
   constructor(
@@ -24,6 +27,7 @@ export class AuthController {
     private readonly deleteAuthTokenUsecase: DeleteAuthTokenUsecase,
   ) {}
 
+  @ApiResponse({ type: TokenModel })
   @Public()
   @Post('login')
   async login(@Body() body: LoginDto, @Res() res: Response) {
@@ -31,6 +35,8 @@ export class AuthController {
     res.status(HttpStatus.OK).json(token.toJson());
   }
 
+  @ApiBearerAuth()
+  @ApiResponse({ type: Boolean })
   @Delete('logout')
   async logout(@Req() req: any, @Res() res: Response) {
     const user = await this.getUserUsecase.call(req.user.user_id, undefined);
@@ -46,6 +52,8 @@ export class AuthController {
     res.status(HttpStatus.OK).json(true);
   }
 
+  @ApiBearerAuth()
+  @ApiResponse({ type: Boolean })
   @Delete('logout/all')
   async logoutAll(@Req() req: any, @Res() res: Response) {
     const user = await this.getUserUsecase.call(req.user.user_id, undefined);

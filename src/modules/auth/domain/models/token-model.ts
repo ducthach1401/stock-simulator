@@ -1,6 +1,9 @@
+import { ApiProperty } from '@nestjs/swagger';
 export class TokenModel {
+  @ApiProperty({ name: 'access_token' })
   public readonly accessToken: string;
 
+  @ApiProperty({ name: 'token_type' })
   public readonly tokenType: string;
 
   constructor(accessToken: string, tokenType: string) {
