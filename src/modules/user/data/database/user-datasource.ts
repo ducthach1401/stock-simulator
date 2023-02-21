@@ -49,6 +49,10 @@ export class UserDatasource {
     entity.password = user.password;
     entity.created_at = user.createdAt;
     entity.updated_at = user.updatedAt;
+    entity.balance = user.balance;
+    entity.profit = user.profit;
+    entity.capital = user.capital;
+    entity.is_admin = user.isAdmin;
     await this.userRepository.save(entity);
     return true;
   }

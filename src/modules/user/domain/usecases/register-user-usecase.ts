@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { UserModel } from '../models/user-model';
 import { UserRepository } from '../repositories/user-repository';
-import * as brcypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
+import { DefaultConfig } from '../enums/default-config';
 
 @Injectable()
 export class RegisterUserUsecase {
@@ -17,7 +18,11 @@ export class RegisterUserUsecase {
       uuidv4(),
       name,
       username,
-      brcypt.hashSync(password, 10),
+      bcrypt.hashSync(password, 10),
+      DefaultConfig.Balance,
+      DefaultConfig.Balance,
+      0,
+      false,
       new Date(),
       new Date(),
     );

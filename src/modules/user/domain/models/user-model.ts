@@ -13,6 +13,18 @@ export class UserModel {
   @ApiProperty()
   public readonly password: string;
 
+  @ApiProperty()
+  public readonly balance: number;
+
+  @ApiProperty()
+  public readonly capital: number;
+
+  @ApiProperty()
+  public readonly profit: number;
+
+  @ApiProperty({ name: 'is_admin' })
+  public readonly isAdmin: boolean;
+
   @ApiProperty({ name: 'created_at' })
   public readonly createdAt: Date;
 
@@ -24,6 +36,10 @@ export class UserModel {
     name: string,
     username: string,
     password: string,
+    balance: number,
+    capital: number,
+    profit: number,
+    isAdmin: boolean,
     createdAt: Date,
     updatedAt: Date,
   ) {
@@ -33,13 +49,19 @@ export class UserModel {
     this.password = password;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+    this.balance = balance;
+    this.capital = capital;
+    this.profit = profit;
+    this.isAdmin = isAdmin;
   }
 
   toJson(): Record<string, any> {
     return {
       id: this.id,
       name: this.name,
-      username: this.username,
+      balance: this.balance,
+      capital: this.capital,
+      profit: this.profit,
       created_at: this.createdAt,
       updated_at: this.updatedAt,
     };

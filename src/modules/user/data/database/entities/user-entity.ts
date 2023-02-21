@@ -21,6 +21,18 @@ export class UserEntity {
   @Column()
   password: string;
 
+  @Column()
+  balance: number;
+
+  @Column()
+  capital: number;
+
+  @Column()
+  profit: number;
+
+  @Column()
+  is_admin: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 
@@ -33,6 +45,10 @@ export class UserEntity {
       this.name,
       this.username,
       this.password,
+      this.balance,
+      this.capital,
+      this.profit,
+      this.is_admin,
       this.created_at,
       this.updated_at,
     );
