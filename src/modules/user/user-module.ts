@@ -4,7 +4,6 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import database from 'src/config/database';
 import user from 'src/config/user';
 import { AuthModule } from '../auth/auth-module';
-import { UserController as UserControllerByMe } from './app/http/controllers/user/user-controller';
 import { UserController as UserControllerByPublic } from './app/http/controllers/public/user-controller';
 import { UserController as UserControllerByUser } from './app/http/controllers/user/user-controller';
 import { UserEntity } from './data/database/entities/user-entity';
@@ -35,11 +34,7 @@ import { UpdateUserUsecase } from './domain/usecases/update-user-usecase';
     TypeOrmModule.forFeature([UserEntity]),
     forwardRef(() => AuthModule),
   ],
-  controllers: [
-    UserControllerByMe,
-    UserControllerByPublic,
-    UserControllerByUser,
-  ],
+  controllers: [UserControllerByPublic, UserControllerByUser],
   providers: [
     UserDatasource,
     GetUserUsecase,
