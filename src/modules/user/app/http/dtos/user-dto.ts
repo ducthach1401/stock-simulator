@@ -1,6 +1,7 @@
 import { Type } from 'class-transformer';
 import {
   IsEnum,
+  IsInt,
   IsNumber,
   IsOptional,
   IsString,
@@ -9,7 +10,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { SortDir } from 'src/core/enums/sort-dir';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 
 export class RegisterUserDto {
   @ApiProperty()
@@ -83,4 +84,13 @@ export class UserIdParam {
   @ApiProperty()
   @IsString()
   id: string;
+}
+
+export class AdminIdParam extends PickType(UserIdParam, ['id']) {}
+export class AddBalanceBody {
+  @ApiProperty()
+  @Min(1000)
+  @IsInt()
+  @Type(() => Number)
+  amount_balance: number;
 }

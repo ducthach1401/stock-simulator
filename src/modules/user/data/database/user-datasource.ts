@@ -104,4 +104,17 @@ export class UserDatasource {
 
     return users.map((user) => user.toModel());
   }
+
+  async addBalance(user: UserModel, amountBalance: number): Promise<void> {
+    await this.userRepository.update(
+      {
+        id: user.id,
+      },
+      {
+        balance: user.balance + amountBalance,
+        capital: user.capital + amountBalance,
+        created_at: new Date(),
+      },
+    );
+  }
 }

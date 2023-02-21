@@ -25,4 +25,6 @@ export abstract class UserRepository {
     sortParams: SortParams,
     search: string | undefined,
   ): Promise<UserModel[]>;
+
+  abstract addBalance(user: UserModel, amountBalance: number): Promise<void>;
 }

@@ -52,4 +52,8 @@ export class UserRepositoryImpl extends UserRepository {
       search,
     );
   }
+
+  async addBalance(user: UserModel, amountBalance: number): Promise<void> {
+    await this.userDatasource.addBalance(user, amountBalance);
+  }
 }
