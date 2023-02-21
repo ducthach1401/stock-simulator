@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
-import { UserModel } from '../models/user-model';
-import { UserRepository } from '../repositories/user-repository';
 import * as bcrypt from 'bcrypt';
-import { DefaultConfig } from '../enums/default-config';
+import { UserRepository } from '../../repositories/user-repository';
+import { UserModel } from '../../models/user-model';
+import { DefaultConfig } from '../../enums/default-config';
 
 @Injectable()
 export class RegisterUserUsecase {

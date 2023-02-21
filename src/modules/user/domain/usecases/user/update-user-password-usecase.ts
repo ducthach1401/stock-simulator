@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { UserModel } from '../models/user-model';
-import { UserRepository } from '../repositories/user-repository';
 import { DeleteAuthTokenUsecase } from 'src/modules/auth/domain/usecases/auth-token/delete-auth-token-usecase';
+import { UserModel } from '../../models/user-model';
+import { UserRepository } from '../../repositories/user-repository';
 
 @Injectable()
 export class UpdateUserPasswordUsecase {

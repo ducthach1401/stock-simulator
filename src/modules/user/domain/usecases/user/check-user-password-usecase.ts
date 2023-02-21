@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { UserModel } from '../models/user-model';
-import { UserRepository } from '../repositories/user-repository';
+import { UserModel } from '../../models/user-model';
+import { UserRepository } from '../../repositories/user-repository';
 
 @Injectable()
 export class CheckUserPasswordUsecase {

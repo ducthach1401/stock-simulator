@@ -3,8 +3,8 @@ import { JwtService } from '@nestjs/jwt';
 import { RoleType } from 'src/core/enums/role-type';
 import { ErrorCode } from 'src/exceptions/error-code';
 import { LogicalException } from 'src/exceptions/logical-exception';
-import { CheckUserPasswordUsecase } from 'src/modules/user/domain/usecases/check-user-password-usecase';
-import { GetUserByUsernameUsecase } from 'src/modules/user/domain/usecases/get-user-by-username-usecase';
+import { CheckUserPasswordUsecase } from 'src/modules/user/domain/usecases/user/check-user-password-usecase';
+import { GetUserByUsernameUsecase } from 'src/modules/user/domain/usecases/user/get-user-by-username-usecase';
 import { TokenModel } from '../models/token-model';
 import { SaveAuthTokenUsecase } from './auth-token/save-auth-token-usecase';
 

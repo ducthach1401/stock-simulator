@@ -3,10 +3,10 @@ import { Response } from 'express';
 import { ErrorCode } from 'src/exceptions/error-code';
 import { LogicalException } from 'src/exceptions/logical-exception';
 import { Public } from 'src/modules/auth/app/decorators/metadata';
-import { GetUserByUsernameUsecase } from 'src/modules/user/domain/usecases/get-user-by-username-usecase';
-import { RegisterUserUsecase } from 'src/modules/user/domain/usecases/register-user-usecase';
 import { RegisterUserDto } from '../../dtos/user-dto';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
+import { RegisterUserUsecase } from 'src/modules/user/domain/usecases/user/register-user-usecase';
+import { GetUserByUsernameUsecase } from 'src/modules/user/domain/usecases/user/get-user-by-username-usecase';
 
 @ApiTags('User / Public')
 @Controller('api/v1/user')

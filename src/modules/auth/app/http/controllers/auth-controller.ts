@@ -11,7 +11,7 @@ import { LoginUsecase } from 'src/modules/auth/domain/usecases/login-usecase';
 import { Public } from '../../decorators/metadata';
 import { LoginDto } from '../dtos/login-dto';
 import { Response } from 'express';
-import { GetUserUsecase } from 'src/modules/user/domain/usecases/get-user-usecase';
+import { GetUserUsecase } from 'src/modules/user/domain/usecases/user/get-user-usecase';
 import { LogicalException } from 'src/exceptions/logical-exception';
 import { ErrorCode } from 'src/exceptions/error-code';
 import { DeleteAuthTokenUsecase } from 'src/modules/auth/domain/usecases/auth-token/delete-auth-token-usecase';

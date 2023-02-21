@@ -14,10 +14,6 @@ import { PaginationParams } from 'src/core/models/pagination-params';
 import { SortParams } from 'src/core/models/sort-params';
 import { ErrorCode } from 'src/exceptions/error-code';
 import { LogicalException } from 'src/exceptions/logical-exception';
-import { GetUserUsecase } from 'src/modules/user/domain/usecases/get-user-usecase';
-import { GetUsersUsecase } from 'src/modules/user/domain/usecases/get-users-usecase';
-import { UpdateUserPasswordUsecase } from 'src/modules/user/domain/usecases/update-user-password-usecase';
-import { UpdateUserUsecase } from 'src/modules/user/domain/usecases/update-user-usecase';
 import {
   UpdatePasswordUserDto,
   UpdateUserDto,
@@ -26,6 +22,10 @@ import {
 } from '../../dtos/user-dto';
 import { ApiTags, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { UserModel } from 'src/modules/user/domain/models/user-model';
+import { GetUserUsecase } from 'src/modules/user/domain/usecases/user/get-user-usecase';
+import { UpdateUserUsecase } from 'src/modules/user/domain/usecases/user/update-user-usecase';
+import { UpdateUserPasswordUsecase } from 'src/modules/user/domain/usecases/user/update-user-password-usecase';
+import { GetUsersUsecase } from 'src/modules/user/domain/usecases/user/get-users-usecase';
 
 @ApiTags('User / User')
 @ApiBearerAuth()
