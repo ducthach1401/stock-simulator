@@ -47,7 +47,7 @@ export class AdminController {
     }
   }
 
-  @Post('user/id/:id')
+  @Post('user/id/:id/balance/popup')
   async addBalance(
     @Req() req: any,
     @Param() param: UserIdParam,
@@ -70,7 +70,7 @@ export class AdminController {
     res.status(HttpStatus.OK).json(true);
   }
 
-  @Delete('user/id/:id')
+  @Delete('user/id/:id/delete')
   async deleteUser(
     @Req() req: any,
     @Param() param: UserIdParam,
