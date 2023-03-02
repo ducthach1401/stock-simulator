@@ -25,6 +25,7 @@ export class RegisterUserUsecase {
       false,
       new Date(),
       new Date(),
+      undefined,
     );
 
     return await this.userRepository.register(model);

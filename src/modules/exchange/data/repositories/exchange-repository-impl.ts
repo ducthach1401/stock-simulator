@@ -13,8 +13,11 @@ export class ExchangeRepositoryImpl extends ExchangeRepository {
     super();
   }
 
-  async get(id: string): Promise<ExchangeModel | undefined> {
-    return await this.exchangeDatasource.get(id);
+  async get(
+    user: UserModel | undefined,
+    id: string,
+  ): Promise<ExchangeModel | undefined> {
+    return await this.exchangeDatasource.get(user, id);
   }
 
   async create(exchange: ExchangeModel): Promise<void> {

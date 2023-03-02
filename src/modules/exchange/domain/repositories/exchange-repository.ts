@@ -5,7 +5,10 @@ import { UserModel } from 'src/modules/user/domain/models/user-model';
 import { ExchangeModel } from '../models/exchange-model';
 
 export abstract class ExchangeRepository {
-  abstract get(id: string): Promise<ExchangeModel | undefined>;
+  abstract get(
+    user: UserModel | undefined,
+    id: string,
+  ): Promise<ExchangeModel | undefined>;
 
   abstract list(
     user: UserModel | undefined,

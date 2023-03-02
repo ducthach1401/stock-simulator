@@ -10,19 +10,19 @@ import {
 @Entity('auth_tokens')
 export class AuthTokensEntity {
   @PrimaryColumn()
-  id: string;
+  id!: string;
 
   @Column()
-  user_id: string;
+  user_id!: string;
 
   @Column()
-  token: string;
+  token!: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 
   toModel(): AuthTokensModel {
     return new AuthTokensModel(

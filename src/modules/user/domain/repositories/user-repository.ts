@@ -1,11 +1,15 @@
+import { PageList } from 'src/core/models/page-list';
 import { PaginationParams } from 'src/core/models/pagination-params';
 import { SortParams } from 'src/core/models/sort-params';
 import { UserModel } from '../models/user-model';
 
 export abstract class UserRepository {
-  abstract get(id: string, relations: string[] | undefined): Promise<UserModel>;
+  abstract get(
+    id: string,
+    relations: string[] | undefined,
+  ): Promise<UserModel | undefined>;
 
-  abstract getByUsername(username: string): Promise<UserModel>;
+  abstract getByUsername(username: string): Promise<UserModel | undefined>;
 
   abstract update(
     user: UserModel,
@@ -24,7 +28,7 @@ export abstract class UserRepository {
     paginationParams: PaginationParams,
     sortParams: SortParams,
     search: string | undefined,
-  ): Promise<UserModel[]>;
+  ): Promise<PageList<UserModel>>;
 
   abstract addBalance(user: UserModel, amountBalance: number): Promise<void>;
 

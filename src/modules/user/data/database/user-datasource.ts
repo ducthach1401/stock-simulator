@@ -6,6 +6,7 @@ import { UserModel } from '../../domain/models/user-model';
 import * as bcrypt from 'bcrypt';
 import { PaginationParams } from 'src/core/models/pagination-params';
 import { SortParams } from 'src/core/models/sort-params';
+import { PageList } from 'src/core/models/page-list';
 
 @Injectable()
 export class UserDatasource {
@@ -14,7 +15,10 @@ export class UserDatasource {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async get(id: string, relations: string[] | undefined): Promise<UserModel> {
+  async get(
+    id: string,
+    relations: string[] | undefined,
+  ): Promise<UserModel | undefined> {
     const user = await this.userRepository.findOne({
       where: {
         id: id,
@@ -22,7 +26,7 @@ export class UserDatasource {
       relations: relations,
     });
     if (!user) {
-      return null;
+      return undefined;
     }
 
     return user.toModel();
@@ -57,14 +61,14 @@ export class UserDatasource {
     return true;
   }
 
-  async getByUsername(username: string): Promise<UserModel> {
+  async getByUsername(username: string): Promise<UserModel | undefined> {
     const user = await this.userRepository.findOne({
       where: {
         username: username,
       },
     });
     if (!user) {
-      return null;
+      return undefined;
     }
     return user.toModel();
   }
@@ -86,7 +90,7 @@ export class UserDatasource {
     paginationParams: PaginationParams,
     sortParams: SortParams,
     search: string | undefined,
-  ): Promise<UserModel[]> {
+  ): Promise<PageList<UserModel>> {
     const options: FindOptionsWhere<UserEntity> = {};
     options.id = Not(user.id);
     if (search) {
@@ -102,7 +106,11 @@ export class UserDatasource {
       take: paginationParams.limit,
     });
 
-    return users.map((user) => user.toModel());
+    return new PageList(
+      paginationParams.page,
+      undefined,
+      users.map((user) => user.toModel()),
+    );
   }
 
   async addBalance(user: UserModel, amountBalance: number): Promise<void> {

@@ -20,7 +20,7 @@ import { ExchangeType } from 'src/modules/exchange/domain/enums/exchange-type';
 export class ExchangeIdParam {
   @ApiProperty()
   @IsString()
-  id: string;
+  id!: string;
 }
 
 export class ListExchangeQueryDto extends IntersectionType(
@@ -30,43 +30,43 @@ export class ListExchangeQueryDto extends IntersectionType(
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
-  search: string;
+  search: string | undefined;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsDate()
   @Type(() => Date)
-  from_time: Date;
+  from_time: Date | undefined;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsDate()
   @Type(() => Date)
-  to_time: Date;
+  to_time: Date | undefined;
 
   @ApiPropertyOptional()
   @IsOptional()
   @Transform((value: any) => parseBoolean(value.obj?.has_finished, false))
   @IsBoolean()
-  has_finished: boolean;
+  has_finished: boolean | undefined;
 }
 
 export class CreateExchangeBodyDto {
   @ApiProperty()
   @IsString()
-  code: string;
+  code!: string;
 
   @ApiProperty()
   @Type(() => Number)
   @IsPositive()
-  volume: number;
+  volume!: number;
 
   @ApiProperty()
   @Type(() => Number)
   @IsPositive()
-  price: number;
+  price!: number;
 
   @ApiProperty()
   @IsEnum(ExchangeType)
-  type: ExchangeType;
+  type!: ExchangeType;
 }

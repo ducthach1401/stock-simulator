@@ -71,7 +71,7 @@ export class ExchangeModel extends DomainModel {
         finished_at: this.finishedAt,
         created_at: this.createdAt,
         updated_at: this.updatedAt,
-        user: this.user,
+        user: this.user?.toJson(showHidden),
       },
       showHidden,
     );

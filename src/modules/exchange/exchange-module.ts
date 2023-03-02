@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from '../user/user-module';
 import { ExchangeController } from './app/http/controllers/exchange-controller';
 import { ExchangeEntity } from './data/database/entities/exchange-entity';
 import { ExchangeDatasource } from './data/database/exchange-datasource';
@@ -11,7 +12,10 @@ import { ListExchangeUsecase } from './domain/usecases/list-exchange-usecase';
 import { MarkFinishedExchangeUsecase } from './domain/usecases/mark-finished-exchange-usecase';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ExchangeEntity])],
+  imports: [
+    TypeOrmModule.forFeature([ExchangeEntity]),
+    forwardRef(() => UserModule),
+  ],
   controllers: [ExchangeController],
   providers: [
     {

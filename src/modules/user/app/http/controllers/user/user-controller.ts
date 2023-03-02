@@ -26,6 +26,7 @@ import { GetUserUsecase } from 'src/modules/user/domain/usecases/user/get-user-u
 import { UpdateUserUsecase } from 'src/modules/user/domain/usecases/user/update-user-usecase';
 import { UpdateUserPasswordUsecase } from 'src/modules/user/domain/usecases/user/update-user-password-usecase';
 import { GetUsersUsecase } from 'src/modules/user/domain/usecases/user/get-users-usecase';
+import { normalizeResponseData } from 'src/core/helpers/utils';
 
 @ApiTags('User / User')
 @ApiBearerAuth()
@@ -49,7 +50,7 @@ export class UserController {
         undefined,
       );
     }
-    res.status(HttpStatus.OK).json(result.toJson());
+    res.status(HttpStatus.OK).json(normalizeResponseData(result));
   }
 
   @ApiResponse({ type: Boolean })
@@ -113,7 +114,8 @@ export class UserController {
       new SortParams(query.sort, query.dir),
       query.search,
     );
-    res.status(HttpStatus.OK).json(users.map((user) => user.toJson()));
+
+    res.status(HttpStatus.OK).json(normalizeResponseData(users));
   }
 
   @ApiResponse({ type: UserModel })
@@ -132,6 +134,6 @@ export class UserController {
       );
     }
     const getUser = await this.getUserUsecase.call(param.id, undefined);
-    res.status(HttpStatus.OK).json(getUser.toJson());
+    res.status(HttpStatus.OK).json(normalizeResponseData(getUser));
   }
 }

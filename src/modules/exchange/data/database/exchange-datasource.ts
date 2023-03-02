@@ -23,14 +23,22 @@ export class ExchangeDatasource {
     private readonly exchangeRepository: Repository<ExchangeEntity>,
   ) {}
 
-  async get(id: string): Promise<ExchangeModel | undefined> {
+  async get(
+    user: UserModel | undefined,
+    id: string,
+  ): Promise<ExchangeModel | undefined> {
+    const conditions: FindOptionsWhere<ExchangeEntity> = {
+      id: id,
+    };
+
+    if (user) {
+      conditions.user_id = user.id;
+    }
     const exchange = await this.exchangeRepository.findOne({
-      where: {
-        id: id,
-      },
+      where: conditions,
     });
 
-    return exchange.toModel();
+    return exchange?.toModel();
   }
 
   async create(exchange: ExchangeModel): Promise<void> {

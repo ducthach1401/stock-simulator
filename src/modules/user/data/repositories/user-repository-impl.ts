@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { PageList } from 'src/core/models/page-list';
 import { PaginationParams } from 'src/core/models/pagination-params';
 import { SortParams } from 'src/core/models/sort-params';
 import { UserModel } from '../../domain/models/user-model';
@@ -11,11 +12,14 @@ export class UserRepositoryImpl extends UserRepository {
     super();
   }
 
-  async get(id: string, relations: string[] | undefined): Promise<UserModel> {
+  async get(
+    id: string,
+    relations: string[] | undefined,
+  ): Promise<UserModel | undefined> {
     return await this.userDatasource.get(id, relations);
   }
 
-  async getByUsername(username: string): Promise<UserModel> {
+  async getByUsername(username: string): Promise<UserModel | undefined> {
     return await this.userDatasource.getByUsername(username);
   }
 
@@ -44,7 +48,7 @@ export class UserRepositoryImpl extends UserRepository {
     paginationParams: PaginationParams,
     sortParams: SortParams,
     search: string | undefined,
-  ): Promise<UserModel[]> {
+  ): Promise<PageList<UserModel>> {
     return await this.userDatasource.list(
       user,
       paginationParams,

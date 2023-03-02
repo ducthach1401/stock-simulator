@@ -6,7 +6,7 @@ import { UserRepository } from '../../repositories/user-repository';
 export class GetUserByUsernameUsecase {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async call(username: string): Promise<UserModel> {
+  async call(username: string): Promise<UserModel | undefined> {
     return await this.userRepository.getByUsername(username);
   }
 }

@@ -1,21 +1,26 @@
 {
   "compilerOptions": {
+    // Type Checking
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    // Modules
     "module": "commonjs",
+    "baseUrl": "./",
+    // Emit
     "declaration": true,
+    "sourceMap": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "es2017",
-    "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "skipLibCheck": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
+    // Interop Constraints
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    // Language and Environment
+    "experimentalDecorators": true,
+    "target": "es2017",
+    // Project
+    "incremental": true,
+    // Completeness
+    "skipLibCheck": true
   }
 }

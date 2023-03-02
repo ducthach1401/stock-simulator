@@ -54,7 +54,7 @@ export class ExchangeController {
       );
     }
 
-    const result = await this.getExchangeUsecase.call(param.id);
+    const result = await this.getExchangeUsecase.call(user, param.id);
     res.status(HttpStatus.OK).json(normalizeResponseData(result));
   }
 
@@ -105,7 +105,14 @@ export class ExchangeController {
       );
     }
 
-    const exchange = await this.getExchangeUsecase.call(param.id);
+    const exchange = await this.getExchangeUsecase.call(user, param.id);
+    if (!exchange) {
+      throw new LogicalException(
+        ErrorCode.EXCHANGE_NOT_FOUND,
+        'Exchange not found.',
+        undefined,
+      );
+    }
     await this.markFinishedExchangeUsecase.call(exchange);
     res.status(HttpStatus.OK).json(normalizeResponseData(true));
   }

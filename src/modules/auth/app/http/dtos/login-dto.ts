@@ -3,9 +3,9 @@ import { ApiProperty } from '@nestjs/swagger';
 export class LoginDto {
   @ApiProperty()
   @IsString()
-  username: string;
+  username!: string;
 
   @ApiProperty()
   @IsString()
-  password: string;
+  password!: string;
 }

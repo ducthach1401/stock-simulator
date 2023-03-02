@@ -14,31 +14,31 @@ import {
 @Entity('exchange')
 export class ExchangeEntity {
   @PrimaryColumn()
-  id: string;
+  id!: string;
 
   @Column()
-  user_id: string;
+  user_id!: string;
 
   @Column()
-  code: string;
+  code!: string;
 
   @Column()
-  volume: number;
+  volume!: number;
 
   @Column()
-  price: number;
+  price!: number;
 
   @Column()
-  type: ExchangeType;
+  type!: ExchangeType;
 
   @Column()
   finished_at?: Date;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 
   @ManyToOne(() => UserEntity)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
@@ -55,7 +55,7 @@ export class ExchangeEntity {
       this.finished_at,
       this.created_at,
       this.updated_at,
-      this.user.toModel(),
+      this.user?.toModel(),
     );
   }
 }

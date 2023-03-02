@@ -1,6 +1,8 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { DomainModel } from 'src/core/models/domain-model';
+import { ExchangeModel } from 'src/modules/exchange/domain/models/exchange-model';
 
-export class UserModel {
+export class UserModel extends DomainModel {
   @ApiProperty()
   public readonly id: string;
 
@@ -31,6 +33,9 @@ export class UserModel {
   @ApiProperty({ name: 'updated_at' })
   public readonly updatedAt: Date;
 
+  @ApiPropertyOptional()
+  public readonly exchange: ExchangeModel[] | undefined;
+
   constructor(
     id: string,
     name: string,
@@ -42,7 +47,9 @@ export class UserModel {
     isAdmin: boolean,
     createdAt: Date,
     updatedAt: Date,
+    exchange: ExchangeModel[] | undefined,
   ) {
+    super();
     this.id = id;
     this.name = name;
     this.username = username;
@@ -53,17 +60,22 @@ export class UserModel {
     this.capital = capital;
     this.profit = profit;
     this.isAdmin = isAdmin;
+    this.exchange = exchange;
   }
 
-  toJson(): Record<string, any> {
-    return {
-      id: this.id,
-      name: this.name,
-      balance: this.balance,
-      capital: this.capital,
-      profit: this.profit,
-      created_at: this.createdAt,
-      updated_at: this.updatedAt,
-    };
+  toJson(showHidden: boolean): Record<string, any> {
+    return this.filterHiddenIfNeed(
+      {
+        id: this.id,
+        name: this.name,
+        balance: this.balance,
+        capital: this.capital,
+        profit: this.profit,
+        created_at: this.createdAt,
+        updated_at: this.updatedAt,
+        exchange: this.exchange?.map((model) => model.toJson(showHidden)),
+      },
+      showHidden,
+    );
   }
 }
