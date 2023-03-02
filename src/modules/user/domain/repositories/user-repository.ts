@@ -27,4 +27,6 @@ export abstract class UserRepository {
   ): Promise<UserModel[]>;
 
   abstract addBalance(user: UserModel, amountBalance: number): Promise<void>;
+
+  abstract delete(user: UserModel): Promise<void>;
 }

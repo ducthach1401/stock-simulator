@@ -12,6 +12,7 @@ import { UserDatasource } from './data/database/user-datasource';
 import { UserRepositoryImpl } from './data/repositories/user-repository-impl';
 import { UserRepository } from './domain/repositories/user-repository';
 import { AddBalanceUsecase } from './domain/usecases/admin/add-balance-usecase';
+import { DeleteUserUsecase } from './domain/usecases/admin/delete-user-usecase';
 import { CheckUserPasswordUsecase } from './domain/usecases/user/check-user-password-usecase';
 import { GetUserByUsernameUsecase } from './domain/usecases/user/get-user-by-username-usecase';
 import { GetUserUsecase } from './domain/usecases/user/get-user-usecase';
@@ -51,6 +52,7 @@ import { UpdateUserUsecase } from './domain/usecases/user/update-user-usecase';
     UpdateUserPasswordUsecase,
     GetUsersUsecase,
     AddBalanceUsecase,
+    DeleteUserUsecase,
   ],
   exports: [
     CheckUserPasswordUsecase,

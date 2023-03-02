@@ -56,4 +56,8 @@ export class UserRepositoryImpl extends UserRepository {
   async addBalance(user: UserModel, amountBalance: number): Promise<void> {
     await this.userDatasource.addBalance(user, amountBalance);
   }
+
+  async delete(user: UserModel): Promise<void> {
+    await this.userDatasource.delete(user);
+  }
 }

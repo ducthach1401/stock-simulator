@@ -117,4 +117,10 @@ export class UserDatasource {
       },
     );
   }
+
+  async delete(user: UserModel): Promise<void> {
+    await this.userRepository.delete({
+      id: user.id,
+    });
+  }
 }
