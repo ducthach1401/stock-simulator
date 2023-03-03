@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Interval } from '@nestjs/schedule';
+import { ErrorCode } from 'src/exceptions/error-code';
+import { LogicalException } from 'src/exceptions/logical-exception';
 import { GetStockUsecase } from 'src/modules/stock-system/domain/usecases/get-stock-usecase';
+import { AddBalanceUsecase } from 'src/modules/user/domain/usecases/admin/add-balance-usecase';
+import { GetUserUsecase } from 'src/modules/user/domain/usecases/user/get-user-usecase';
 import { ExchangeType } from '../enums/exchange-type';
 import { GetExchangesUsecase } from './get-exchanges-usecase';
 import { MarkFinishedExchangeUsecase } from './mark-finished-exchange-usecase';
@@ -11,6 +15,8 @@ export class ScheduleBuyStocksExchangeUsecase {
     private readonly getExchangesUsecase: GetExchangesUsecase,
     private readonly getStockUsecase: GetStockUsecase,
     private readonly markFinishedExchangeUsecase: MarkFinishedExchangeUsecase,
+    private readonly addBalanceUsecase: AddBalanceUsecase,
+    private readonly getUserUsecase: GetUserUsecase,
   ) {}
 
   @Interval(3000)
@@ -22,13 +28,27 @@ export class ScheduleBuyStocksExchangeUsecase {
 
     for (const exchange of exchanges) {
       const stock = await this.getStockUsecase.call(exchange.code);
-      if (stock) {
-        if (exchange.price >= stock.purchase_price) {
-          await this.markFinishedExchangeUsecase.call(
-            stock.purchase_price,
-            exchange,
+      if (!stock) {
+        continue;
+      }
+
+      const value = exchange.price - stock.purchase_price;
+      if (value >= 0) {
+        await this.markFinishedExchangeUsecase.call(
+          stock.purchase_price,
+          exchange,
+        );
+
+        const user = await this.getUserUsecase.call(exchange.userId, undefined);
+        if (!user) {
+          throw new LogicalException(
+            ErrorCode.USER_NOT_FOUND,
+            'User invalid.',
+            undefined,
           );
         }
+
+        await this.addBalanceUsecase.call(user, value * exchange.volume);
       }
     }
   }
