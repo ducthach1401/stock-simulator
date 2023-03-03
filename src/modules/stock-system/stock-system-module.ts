@@ -13,6 +13,10 @@ import { StockSystemRepository } from './domain/repositories/stock-system-reposi
 import { CollectSystemStockInSsiExchangeUsecase } from './domain/usecases/collect-system-stock-in-ssi-exchange-usecase';
 import { GetAllStocksUsecase } from './domain/usecases/get-all-stocks-usecase';
 import { GetStockUsecase } from './domain/usecases/get-stock-usecase';
+import { CreateTransactionStockUsecase } from './domain/usecases/transactions/create-transaction-stock-usecase';
+import { GetTransactionStockUsecase } from './domain/usecases/transactions/get-transaction-stock-usecase';
+import { GetTransactionStocksUsecase } from './domain/usecases/transactions/get-transaction-stocks-usecase';
+import { UpdateTransactionStockUsecase } from './domain/usecases/transactions/update-transaction-stock-usecase';
 
 @Module({
   imports: [
@@ -33,6 +37,10 @@ import { GetStockUsecase } from './domain/usecases/get-stock-usecase';
     GetStockUsecase,
     GetAllStocksUsecase,
     StockSystemDatasource,
+    CreateTransactionStockUsecase,
+    GetTransactionStockUsecase,
+    GetTransactionStocksUsecase,
+    UpdateTransactionStockUsecase,
   ],
   exports: [GetStockUsecase],
 })
