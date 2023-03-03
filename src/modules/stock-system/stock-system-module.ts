@@ -25,5 +25,6 @@ import { GetStockUsecase } from './domain/usecases/get-stock-usecase';
     GetStockUsecase,
     GetAllStocksUsecase,
   ],
+  exports: [GetStockUsecase],
 })
 export class StockSystemModule {}

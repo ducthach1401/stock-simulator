@@ -11,4 +11,5 @@ export enum ErrorCode {
   USER_IS_NOT_PERMITTED = '102|400',
 
   EXCHANGE_NOT_FOUND = '200|400',
+  CODE_INVALID = '201|400',
 }

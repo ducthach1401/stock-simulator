@@ -13,6 +13,7 @@ import {
   Not,
   Repository,
 } from 'typeorm';
+import { ExchangeType } from '../../domain/enums/exchange-type';
 import { ExchangeModel } from '../../domain/models/exchange-model';
 import { ExchangeEntity } from './entities/exchange-entity';
 
@@ -111,5 +112,25 @@ export class ExchangeDatasource {
         updated_at: new Date(),
       },
     );
+  }
+
+  async getAll(
+    type: ExchangeType | undefined,
+    hasFinished: boolean | undefined,
+  ): Promise<ExchangeModel[]> {
+    const conditions: FindOptionsWhere<ExchangeEntity> = {};
+    if (hasFinished !== undefined) {
+      conditions.finished_at = hasFinished ? Not(IsNull()) : IsNull();
+    }
+
+    if (type !== undefined) {
+      conditions.type = type;
+    }
+
+    const exchanges = await this.exchangeRepository.find({
+      where: conditions,
+    });
+
+    return exchanges.map((exchange) => exchange.toModel());
   }
 }

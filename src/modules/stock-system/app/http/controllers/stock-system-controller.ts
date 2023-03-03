@@ -1,4 +1,5 @@
 import { Controller, Get, HttpStatus, Param, Req, Res } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { ErrorCode } from 'src/exceptions/error-code';
 import { LogicalException } from 'src/exceptions/logical-exception';
@@ -6,6 +7,8 @@ import { GetAllStocksUsecase } from 'src/modules/stock-system/domain/usecases/ge
 import { GetStockUsecase } from 'src/modules/stock-system/domain/usecases/get-stock-usecase';
 import { GetUserUsecase } from 'src/modules/user/domain/usecases/user/get-user-usecase';
 
+@ApiTags('Stock / User')
+@ApiBearerAuth()
 @Controller('api/v1/stock')
 export class StockSystemController {
   constructor(

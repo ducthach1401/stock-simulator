@@ -3,6 +3,7 @@ import { PageList } from 'src/core/models/page-list';
 import { PaginationParams } from 'src/core/models/pagination-params';
 import { SortParams } from 'src/core/models/sort-params';
 import { UserModel } from 'src/modules/user/domain/models/user-model';
+import { ExchangeType } from '../../domain/enums/exchange-type';
 import { ExchangeModel } from '../../domain/models/exchange-model';
 import { ExchangeRepository } from '../../domain/repositories/exchange-repository';
 import { ExchangeDatasource } from '../database/exchange-datasource';
@@ -46,5 +47,12 @@ export class ExchangeRepositoryImpl extends ExchangeRepository {
 
   async markFinished(exchange: ExchangeModel): Promise<void> {
     await this.exchangeDatasource.markFinished(exchange);
+  }
+
+  async getAll(
+    type: ExchangeType | undefined,
+    hasFinished: boolean | undefined,
+  ): Promise<ExchangeModel[]> {
+    return await this.exchangeDatasource.getAll(type, hasFinished);
   }
 }

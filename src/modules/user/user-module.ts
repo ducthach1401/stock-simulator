@@ -13,6 +13,7 @@ import { UserRepositoryImpl } from './data/repositories/user-repository-impl';
 import { UserRepository } from './domain/repositories/user-repository';
 import { AddBalanceUsecase } from './domain/usecases/admin/add-balance-usecase';
 import { DeleteUserUsecase } from './domain/usecases/admin/delete-user-usecase';
+import { SubtractBalanceUsecase } from './domain/usecases/admin/subtract-balance-usecase';
 import { CheckUserPasswordUsecase } from './domain/usecases/user/check-user-password-usecase';
 import { GetUserByUsernameUsecase } from './domain/usecases/user/get-user-by-username-usecase';
 import { GetUserUsecase } from './domain/usecases/user/get-user-usecase';
@@ -53,12 +54,15 @@ import { UpdateUserUsecase } from './domain/usecases/user/update-user-usecase';
     GetUsersUsecase,
     AddBalanceUsecase,
     DeleteUserUsecase,
+    SubtractBalanceUsecase,
   ],
   exports: [
     CheckUserPasswordUsecase,
     GetUserByUsernameUsecase,
     UpdateUserUsecase,
     GetUserUsecase,
+    SubtractBalanceUsecase,
+    AddBalanceUsecase,
   ],
 })
 export class UserModule {}

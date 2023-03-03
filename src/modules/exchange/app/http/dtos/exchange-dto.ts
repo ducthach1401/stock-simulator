@@ -54,6 +54,7 @@ export class ListExchangeQueryDto extends IntersectionType(
 export class CreateExchangeBodyDto {
   @ApiProperty()
   @IsString()
+  @Transform((value: any) => String(value.obj?.code).toUpperCase())
   code!: string;
 
   @ApiProperty()
