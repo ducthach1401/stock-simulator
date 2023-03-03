@@ -1,7 +1,6 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import database from 'src/config/database';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import user from 'src/config/user';
 import { AuthModule } from '../auth/auth-module';
 import { AdminController } from './app/http/controllers/admin/admin-controller';
@@ -25,15 +24,7 @@ import { UpdateUserUsecase } from './domain/usecases/user/update-user-usecase';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [database, user],
-    }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) =>
-        configService.get<TypeOrmModuleOptions>(
-          'database',
-        ) as TypeOrmModuleOptions,
+      load: [user],
     }),
     TypeOrmModule.forFeature([UserEntity]),
     forwardRef(() => AuthModule),
