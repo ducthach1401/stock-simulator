@@ -98,8 +98,29 @@ export class StockSystemDatasource {
     entity.code = stock.code;
     entity.volume = stock.volume;
     entity.purchase_price = stock.purchasePrice;
+    entity.is_exists = stock.isExists;
     entity.created_at = stock.createdAt;
     entity.updated_at = stock.updatedAt;
     await this.stockRepository.save(entity);
+  }
+
+  async getByTransactionId(
+    transactionId: string,
+  ): Promise<StockModel | undefined> {
+    return (
+      await this.stockRepository.findOne({
+        where: {
+          transaction_id: transactionId,
+        },
+      })
+    )?.toModel();
+  }
+
+  async totalStock(user: UserModel, code: string): Promise<number> {
+    const total = await this.stockRepository.query(
+      `SELECT SUM(volume) FROM stocks WHERE user_id='${user.id}' AND code='${code}'`,
+    );
+
+    return Number(total[0].sum);
   }
 }

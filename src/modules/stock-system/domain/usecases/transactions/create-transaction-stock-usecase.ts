@@ -15,6 +15,7 @@ export class CreateTransactionStockUsecase {
     code: string,
     volume: number,
     purchasePrice: number,
+    isExists: boolean,
   ): Promise<void> {
     const stock = new StockModel(
       v4(),
@@ -23,7 +24,7 @@ export class CreateTransactionStockUsecase {
       code,
       volume,
       purchasePrice,
-      true,
+      isExists,
       new Date(),
       new Date(),
       undefined,

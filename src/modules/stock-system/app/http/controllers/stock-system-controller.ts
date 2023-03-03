@@ -66,7 +66,6 @@ export class StockSystemController {
         undefined,
       );
     }
-
     const stock = await this.getStockUsecase.call(param.name);
     res.status(HttpStatus.OK).json(stock);
   }

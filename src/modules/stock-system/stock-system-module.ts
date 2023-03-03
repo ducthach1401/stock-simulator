@@ -14,8 +14,10 @@ import { CollectSystemStockInSsiExchangeUsecase } from './domain/usecases/collec
 import { GetAllStocksUsecase } from './domain/usecases/get-all-stocks-usecase';
 import { GetStockUsecase } from './domain/usecases/get-stock-usecase';
 import { CreateTransactionStockUsecase } from './domain/usecases/transactions/create-transaction-stock-usecase';
+import { GetTransactionStockByTransactionIdUsecase } from './domain/usecases/transactions/get-transaction-stock-by-transaction-id-usecase';
 import { GetTransactionStockUsecase } from './domain/usecases/transactions/get-transaction-stock-usecase';
 import { GetTransactionStocksUsecase } from './domain/usecases/transactions/get-transaction-stocks-usecase';
+import { TotalStockVolumeUsecase } from './domain/usecases/transactions/total-stock-volume-usecase';
 import { UpdateTransactionStockUsecase } from './domain/usecases/transactions/update-transaction-stock-usecase';
 
 @Module({
@@ -41,7 +43,15 @@ import { UpdateTransactionStockUsecase } from './domain/usecases/transactions/up
     GetTransactionStockUsecase,
     GetTransactionStocksUsecase,
     UpdateTransactionStockUsecase,
+    GetTransactionStockByTransactionIdUsecase,
+    TotalStockVolumeUsecase,
   ],
-  exports: [GetStockUsecase],
+  exports: [
+    GetStockUsecase,
+    CreateTransactionStockUsecase,
+    UpdateTransactionStockUsecase,
+    GetTransactionStockByTransactionIdUsecase,
+    TotalStockVolumeUsecase,
+  ],
 })
 export class StockSystemModule {}

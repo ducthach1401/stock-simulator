@@ -23,4 +23,10 @@ export abstract class StockSystemRepository {
     fromTime: Date | undefined,
     toTime: Date | undefined,
   ): Promise<PageList<StockModel>>;
+
+  abstract getByTransactionId(
+    transactionId: string,
+  ): Promise<StockModel | undefined>;
+
+  abstract totalStock(user: UserModel, code: string): Promise<number>;
 }

@@ -53,4 +53,14 @@ export class StockSystemRepositoryImpl extends StockSystemRepository {
   async create(stock: StockModel): Promise<void> {
     await this.stockSystemDatasource.create(stock);
   }
+
+  async getByTransactionId(
+    transactionId: string,
+  ): Promise<StockModel | undefined> {
+    return await this.stockSystemDatasource.getByTransactionId(transactionId);
+  }
+
+  async totalStock(user: UserModel, code: string): Promise<number> {
+    return await this.stockSystemDatasource.totalStock(user, code);
+  }
 }

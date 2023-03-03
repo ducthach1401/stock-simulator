@@ -8,6 +8,8 @@ import { GetStockUsecase } from 'src/modules/stock-system/domain/usecases/get-st
 import { LogicalException } from 'src/exceptions/logical-exception';
 import { ErrorCode } from 'src/exceptions/error-code';
 import { SubtractBalanceUsecase } from 'src/modules/user/domain/usecases/admin/subtract-balance-usecase';
+import { TotalStockVolumeUsecase } from 'src/modules/stock-system/domain/usecases/transactions/total-stock-volume-usecase';
+import { CreateTransactionStockUsecase } from 'src/modules/stock-system/domain/usecases/transactions/create-transaction-stock-usecase';
 
 @Injectable()
 export class CreateExchangeUsecase {
@@ -15,6 +17,8 @@ export class CreateExchangeUsecase {
     private readonly exchangeRepository: ExchangeRepository,
     private readonly getStockUsecase: GetStockUsecase,
     private readonly subtractBalanceUsecase: SubtractBalanceUsecase,
+    private readonly totalStockVolumeUsecase: TotalStockVolumeUsecase,
+    private readonly createTransactionStockUsecase: CreateTransactionStockUsecase,
   ) {}
 
   async call(
@@ -36,7 +40,14 @@ export class CreateExchangeUsecase {
     if (type == ExchangeType.Buy) {
       await this.subtractBalanceUsecase.call(user, volume * price);
     } else {
-      console.log('Note process sell');
+      const total = await this.totalStockVolumeUsecase.call(user, code);
+      if (total < volume) {
+        throw new LogicalException(
+          ErrorCode.EXCHANGE_INVALID,
+          'Exchange invalid.',
+          undefined,
+        );
+      }
     }
 
     const model = new ExchangeModel(
@@ -54,5 +65,16 @@ export class CreateExchangeUsecase {
     );
 
     await this.exchangeRepository.create(model);
+
+    if (type == ExchangeType.Sell) {
+      await this.createTransactionStockUsecase.call(
+        user,
+        model,
+        code,
+        -volume,
+        price,
+        false,
+      );
+    }
   }
 }
