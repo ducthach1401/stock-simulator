@@ -10,80 +10,80 @@ import {
   MinLength,
 } from 'class-validator';
 import { SortDir } from 'src/core/enums/sort-dir';
-import { ApiProperty, PickType } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional, PickType } from '@nestjs/swagger';
 
 export class RegisterUserDto {
   @ApiProperty()
   @IsString()
   @MaxLength(30)
   @MinLength(3)
-  name: string;
+  name!: string;
 
   @ApiProperty()
   @IsString()
   @MaxLength(30)
   @MinLength(3)
-  username: string;
+  username!: string;
 
   @ApiProperty()
   @IsString()
   @MaxLength(30)
   @MinLength(6)
-  password: string;
+  password!: string;
 }
 
 export class UpdateUserDto {
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @MaxLength(30)
   @MinLength(1)
-  name: string;
+  name: string | undefined;
 }
 
 export class UpdatePasswordUserDto {
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsString()
   @MaxLength(30)
   @MinLength(6)
-  password: string;
+  password!: string;
 }
 
 export class UserListQuery {
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsOptional()
   @IsNumber()
   @Type(() => Number)
   @Min(1)
-  page: number;
+  page: number | undefined;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsOptional()
   @IsNumber()
   @Type(() => Number)
   @Min(1)
-  limit: number;
+  limit: number | undefined;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsOptional()
   @IsString()
-  sort: string;
+  sort: string | undefined;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsOptional()
   @IsEnum(SortDir)
-  dir: SortDir;
+  dir: SortDir | undefined;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsOptional()
   @IsString()
-  search: string;
+  search: string | undefined;
 }
 
 export class UserIdParam {
   @ApiProperty()
   @IsString()
-  id: string;
+  id!: string;
 }
 
 export class AdminIdParam extends PickType(UserIdParam, ['id']) {}
@@ -92,5 +92,5 @@ export class AddBalanceBody {
   @Min(1000)
   @IsInt()
   @Type(() => Number)
-  amount_balance: number;
+  amount_balance!: number;
 }

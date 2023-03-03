@@ -6,7 +6,10 @@ import { UserRepository } from '../../repositories/user-repository';
 export class GetUserUsecase {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async call(id: string, relations: string[] | undefined): Promise<UserModel> {
+  async call(
+    id: string,
+    relations: string[] | undefined,
+  ): Promise<UserModel | undefined> {
     return await this.userRepository.get(id, relations);
   }
 }

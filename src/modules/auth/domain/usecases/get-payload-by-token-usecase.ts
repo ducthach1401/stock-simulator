@@ -7,7 +7,7 @@ import { LogicalException } from 'src/exceptions/logical-exception';
 export class GetPayloadByTokenUsecase {
   constructor(private readonly jwtService: JwtService) {}
 
-  async call(token: string): Promise<Record<string, any>> {
+  async call(token: string): Promise<Record<string, any> | undefined> {
     try {
       return await this.jwtService.verifyAsync(token);
     } catch (error) {
