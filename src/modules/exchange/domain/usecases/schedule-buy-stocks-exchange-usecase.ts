@@ -24,7 +24,10 @@ export class ScheduleBuyStocksExchangeUsecase {
       const stock = await this.getStockUsecase.call(exchange.code);
       if (stock) {
         if (exchange.price >= stock.purchase_price) {
-          await this.markFinishedExchangeUsecase.call(exchange);
+          await this.markFinishedExchangeUsecase.call(
+            stock.purchase_price,
+            exchange,
+          );
         }
       }
     }

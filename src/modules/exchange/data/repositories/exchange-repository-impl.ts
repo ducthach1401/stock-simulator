@@ -45,8 +45,11 @@ export class ExchangeRepositoryImpl extends ExchangeRepository {
     );
   }
 
-  async markFinished(exchange: ExchangeModel): Promise<void> {
-    await this.exchangeDatasource.markFinished(exchange);
+  async markFinished(
+    matchedPrice: number | undefined,
+    exchange: ExchangeModel,
+  ): Promise<void> {
+    await this.exchangeDatasource.markFinished(matchedPrice, exchange);
   }
 
   async getAll(

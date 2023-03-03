@@ -28,5 +28,8 @@ export abstract class ExchangeRepository {
 
   abstract create(exchange: ExchangeModel): Promise<void>;
 
-  abstract markFinished(exchange: ExchangeModel): Promise<void>;
+  abstract markFinished(
+    matchedPrice: number | undefined,
+    exchange: ExchangeModel,
+  ): Promise<void>;
 }

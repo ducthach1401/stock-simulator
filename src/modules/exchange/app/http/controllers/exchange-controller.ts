@@ -113,7 +113,7 @@ export class ExchangeController {
         undefined,
       );
     }
-    await this.markFinishedExchangeUsecase.call(exchange);
+    await this.markFinishedExchangeUsecase.call(undefined, exchange);
     res.status(HttpStatus.OK).json(normalizeResponseData(true));
   }
 

@@ -22,6 +22,9 @@ export class ExchangeModel extends DomainModel {
   @ApiProperty()
   public readonly type: ExchangeType;
 
+  @ApiPropertyOptional({ name: 'matched_price' })
+  public readonly matchedPrice: number | undefined;
+
   @ApiPropertyOptional({ name: 'finished_at' })
   public readonly finishedAt: Date | undefined;
 
@@ -41,6 +44,7 @@ export class ExchangeModel extends DomainModel {
     volume: number,
     price: number,
     type: ExchangeType,
+    matchedPrice: number | undefined,
     finishedAt: Date | undefined,
     createdAt: Date,
     updatedAt: Date,
@@ -52,6 +56,7 @@ export class ExchangeModel extends DomainModel {
     this.code = code;
     this.volume = volume;
     this.price = price;
+    this.matchedPrice = matchedPrice;
     this.type = type;
     this.finishedAt = finishedAt;
     this.createdAt = createdAt;
@@ -68,6 +73,7 @@ export class ExchangeModel extends DomainModel {
         volume: this.volume,
         price: this.price,
         type: this.type,
+        matched_price: this.matchedPrice,
         finished_at: this.finishedAt,
         created_at: this.createdAt,
         updated_at: this.updatedAt,

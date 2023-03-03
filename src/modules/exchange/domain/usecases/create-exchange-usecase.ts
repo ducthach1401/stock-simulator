@@ -39,6 +39,7 @@ export class CreateExchangeUsecase {
       price,
       type,
       undefined,
+      undefined,
       new Date(),
       new Date(),
       undefined,

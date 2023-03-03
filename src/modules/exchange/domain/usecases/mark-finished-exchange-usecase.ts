@@ -6,7 +6,10 @@ import { ExchangeRepository } from '../repositories/exchange-repository';
 export class MarkFinishedExchangeUsecase {
   constructor(private readonly exchangeRepository: ExchangeRepository) {}
 
-  async call(exchange: ExchangeModel): Promise<void> {
-    await this.exchangeRepository.markFinished(exchange);
+  async call(
+    matchedPrice: number | undefined,
+    exchange: ExchangeModel,
+  ): Promise<void> {
+    await this.exchangeRepository.markFinished(matchedPrice, exchange);
   }
 }

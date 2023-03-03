@@ -32,6 +32,9 @@ export class ExchangeEntity {
   type!: ExchangeType;
 
   @Column()
+  matched_price?: number;
+
+  @Column()
   finished_at?: Date;
 
   @CreateDateColumn()
@@ -52,6 +55,7 @@ export class ExchangeEntity {
       this.volume,
       this.price,
       this.type,
+      this.matched_price,
       this.finished_at,
       this.created_at,
       this.updated_at,

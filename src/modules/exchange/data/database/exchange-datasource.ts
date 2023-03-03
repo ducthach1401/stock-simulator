@@ -102,12 +102,16 @@ export class ExchangeDatasource {
     );
   }
 
-  async markFinished(exchange: ExchangeModel): Promise<void> {
+  async markFinished(
+    matchedPrice: number | undefined,
+    exchange: ExchangeModel,
+  ): Promise<void> {
     await this.exchangeRepository.update(
       {
         id: exchange.id,
       },
       {
+        matched_price: matchedPrice,
         finished_at: new Date(),
         updated_at: new Date(),
       },
