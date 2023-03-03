@@ -46,4 +46,19 @@ export class StockSystemController {
     const stock = await this.getStockUsecase.call(param.name);
     res.status(HttpStatus.OK).json(stock);
   }
+
+  @Get('me')
+  async getMyStocks(@Req() req: any, @Res() res: Response) {
+    const user = await this.getUserUsecase.call(req.user.user_id, undefined);
+    if (!user) {
+      throw new LogicalException(
+        ErrorCode.USER_NOT_FOUND,
+        'User not found.',
+        undefined,
+      );
+    }
+
+    const stocks = await this.getAllStocksUsecase.call();
+    res.status(HttpStatus.OK).json(stocks);
+  }
 }
