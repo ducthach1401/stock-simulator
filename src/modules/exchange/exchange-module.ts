@@ -13,6 +13,7 @@ import { GetExchangesUsecase } from './domain/usecases/get-exchanges-usecase';
 import { ListExchangeUsecase } from './domain/usecases/list-exchange-usecase';
 import { MarkFinishedExchangeUsecase } from './domain/usecases/mark-finished-exchange-usecase';
 import { ScheduleBuyStocksExchangeUsecase } from './domain/usecases/schedule-buy-stocks-exchange-usecase';
+import { ScheduleSellStocksExchangeUsecase } from './domain/usecases/schedule-sell-stocks-exchange-usecase';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { ScheduleBuyStocksExchangeUsecase } from './domain/usecases/schedule-buy
     MarkFinishedExchangeUsecase,
     ScheduleBuyStocksExchangeUsecase,
     GetExchangesUsecase,
+    ScheduleSellStocksExchangeUsecase,
   ],
 })
 export class ExchangeModule {}

@@ -7,12 +7,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { GetStockUsecase } from 'src/modules/stock-system/domain/usecases/get-stock-usecase';
 import { LogicalException } from 'src/exceptions/logical-exception';
 import { ErrorCode } from 'src/exceptions/error-code';
+import { SubtractBalanceUsecase } from 'src/modules/user/domain/usecases/admin/subtract-balance-usecase';
 
 @Injectable()
 export class CreateExchangeUsecase {
   constructor(
     private readonly exchangeRepository: ExchangeRepository,
     private readonly getStockUsecase: GetStockUsecase,
+    private readonly subtractBalanceUsecase: SubtractBalanceUsecase,
   ) {}
 
   async call(
@@ -29,6 +31,10 @@ export class CreateExchangeUsecase {
         'Code invalid.',
         undefined,
       );
+    }
+
+    if (type == ExchangeType.Buy) {
+      await this.subtractBalanceUsecase.call(user, volume * price);
     }
 
     const model = new ExchangeModel(
