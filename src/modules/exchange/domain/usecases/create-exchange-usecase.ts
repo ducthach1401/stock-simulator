@@ -35,6 +35,7 @@ export class CreateExchangeUsecase {
 
     if (type == ExchangeType.Buy) {
       await this.subtractBalanceUsecase.call(user, volume * price);
+    } else {
     }
 
     const model = new ExchangeModel(
