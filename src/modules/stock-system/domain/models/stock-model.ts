@@ -1,9 +1,11 @@
 import { DomainModel } from 'src/core/models/domain-model';
+import { ExchangeModel } from 'src/modules/exchange/domain/models/exchange-model';
 import { UserModel } from 'src/modules/user/domain/models/user-model';
 
 export class StockModel extends DomainModel {
   public readonly id: string;
   public readonly userId: string;
+  public readonly transactionId: string;
   public readonly code: string;
   public readonly volume: number;
   public readonly purchasePrice: number;
@@ -11,10 +13,12 @@ export class StockModel extends DomainModel {
   public readonly createdAt: Date;
   public readonly updatedAt: Date;
   public readonly user: UserModel | undefined;
+  public readonly transaction: ExchangeModel | undefined;
 
   constructor(
     id: string,
     userId: string,
+    transactionId: string,
     code: string,
     volume: number,
     purchasePrice: number,
@@ -22,10 +26,12 @@ export class StockModel extends DomainModel {
     createdAt: Date,
     updatedAt: Date,
     user: UserModel | undefined,
+    transaction: ExchangeModel | undefined,
   ) {
     super();
     this.id = id;
     this.userId = userId;
+    this.transactionId = transactionId;
     this.code = code;
     this.volume = volume;
     this.purchasePrice = purchasePrice;
@@ -33,6 +39,7 @@ export class StockModel extends DomainModel {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.user = user;
+    this.transaction = transaction;
   }
 
   toJson(showHidden: boolean): Record<string, any> {

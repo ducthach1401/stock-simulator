@@ -1,3 +1,4 @@
+import { ExchangeEntity } from 'src/modules/exchange/data/database/entities/exchange-entity';
 import { StockModel } from 'src/modules/stock-system/domain/models/stock-model';
 import { UserEntity } from 'src/modules/user/data/database/entities/user-entity';
 import {
@@ -6,6 +7,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -17,6 +19,9 @@ export class StockEntity {
 
   @Column()
   user_id!: string;
+
+  @Column()
+  transaction_id!: string;
 
   @Column()
   code!: string;
@@ -40,10 +45,15 @@ export class StockEntity {
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user?: UserEntity;
 
+  @OneToOne(() => ExchangeEntity)
+  @JoinColumn({ name: 'transaction_id' })
+  transaction?: ExchangeEntity;
+
   toModel(): StockModel {
     return new StockModel(
       this.id,
       this.user_id,
+      this.transaction_id,
       this.code,
       this.volume,
       this.purchase_price,
@@ -51,6 +61,7 @@ export class StockEntity {
       this.created_at,
       this.updated_at,
       this.user?.toModel(),
+      this.transaction?.toModel(),
     );
   }
 }
