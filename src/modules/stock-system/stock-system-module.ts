@@ -8,6 +8,8 @@ import { StockSystemRepositoryImpl } from './data/repositories/stock-system-repo
 import { StockSystemService } from './data/services/stock-system-service';
 import { StockSystemRepository } from './domain/repositories/stock-system-repository';
 import { CollectSystemStockInSsiExchangeUsecase } from './domain/usecases/collect-system-stock-in-ssi-exchange-usecase';
+import { GetAllStocksUsecase } from './domain/usecases/get-all-stocks-usecase';
+import { GetStockUsecase } from './domain/usecases/get-stock-usecase';
 
 @Module({
   imports: [HttpModule, ScheduleModule.forRoot(), forwardRef(() => UserModule)],
@@ -20,6 +22,8 @@ import { CollectSystemStockInSsiExchangeUsecase } from './domain/usecases/collec
     StockSystemService,
     StockSystemSchedule,
     CollectSystemStockInSsiExchangeUsecase,
+    GetStockUsecase,
+    GetAllStocksUsecase,
   ],
 })
 export class StockSystemModule {}

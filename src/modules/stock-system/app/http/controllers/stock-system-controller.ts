@@ -1,25 +1,17 @@
-import {
-  CACHE_MANAGER,
-  Controller,
-  Get,
-  HttpStatus,
-  Inject,
-  Param,
-  Req,
-  Res,
-} from '@nestjs/common';
-import { Cache } from 'cache-manager';
+import { Controller, Get, HttpStatus, Param, Req, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { ErrorCode } from 'src/exceptions/error-code';
 import { LogicalException } from 'src/exceptions/logical-exception';
+import { GetAllStocksUsecase } from 'src/modules/stock-system/domain/usecases/get-all-stocks-usecase';
+import { GetStockUsecase } from 'src/modules/stock-system/domain/usecases/get-stock-usecase';
 import { GetUserUsecase } from 'src/modules/user/domain/usecases/user/get-user-usecase';
 
 @Controller('api/v1/stock')
 export class StockSystemController {
   constructor(
-    @Inject(CACHE_MANAGER)
-    private readonly cacheManager: Cache,
     private readonly getUserUsecase: GetUserUsecase,
+    private readonly getAllStocksUsecase: GetAllStocksUsecase,
+    private readonly getStockUsecase: GetStockUsecase,
   ) {}
 
   @Get('all')
@@ -33,7 +25,7 @@ export class StockSystemController {
       );
     }
 
-    const stocks = await this.cacheManager.get('all_stock');
+    const stocks = await this.getAllStocksUsecase.call();
     res.status(HttpStatus.OK).json(stocks);
   }
 
@@ -48,7 +40,7 @@ export class StockSystemController {
       );
     }
 
-    const stock = await this.cacheManager.get(param.name);
+    const stock = await this.getStockUsecase.call(param.name);
     res.status(HttpStatus.OK).json(stock);
   }
 }
