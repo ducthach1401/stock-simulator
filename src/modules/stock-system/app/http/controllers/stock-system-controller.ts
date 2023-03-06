@@ -18,6 +18,7 @@ import { GetAllStocksUsecase } from 'src/modules/stock-system/domain/usecases/ge
 import { GetStockUsecase } from 'src/modules/stock-system/domain/usecases/get-stock-usecase';
 import { GetTransactionStockUsecase } from 'src/modules/stock-system/domain/usecases/transactions/get-transaction-stock-usecase';
 import { GetTransactionStocksUsecase } from 'src/modules/stock-system/domain/usecases/transactions/get-transaction-stocks-usecase';
+import { MergeTransactionStocksUsecase } from 'src/modules/stock-system/domain/usecases/transactions/merge-transaction-stocks-usecase';
 import { GetUserUsecase } from 'src/modules/user/domain/usecases/user/get-user-usecase';
 import {
   GetMyStockParamsDto,
@@ -35,6 +36,7 @@ export class StockSystemController {
     private readonly getStockUsecase: GetStockUsecase,
     private readonly getTransactionStocksUsecase: GetTransactionStocksUsecase,
     private readonly getTransactionStockUsecase: GetTransactionStockUsecase,
+    private readonly mergeTransactionStocksUsecase: MergeTransactionStocksUsecase,
   ) {}
 
   @Get('all')
@@ -119,6 +121,22 @@ export class StockSystemController {
     }
 
     const stock = await this.getTransactionStockUsecase.call(param.id);
+
+    res.status(HttpStatus.OK).json(normalizeResponseData(stock));
+  }
+
+  @Get('transaction/merge')
+  async mergeMyStock(@Req() req: any, @Res() res: Response) {
+    const user = await this.getUserUsecase.call(req.user.user_id, undefined);
+    if (!user) {
+      throw new LogicalException(
+        ErrorCode.USER_NOT_FOUND,
+        'User not found.',
+        undefined,
+      );
+    }
+
+    const stock = await this.mergeTransactionStocksUsecase.call(user);
 
     res.status(HttpStatus.OK).json(normalizeResponseData(stock));
   }

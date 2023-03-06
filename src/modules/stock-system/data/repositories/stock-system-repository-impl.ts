@@ -67,4 +67,8 @@ export class StockSystemRepositoryImpl extends StockSystemRepository {
   async delete(stock: StockModel): Promise<void> {
     await this.stockSystemDatasource.delete(stock);
   }
+
+  async merge(user: UserModel): Promise<Record<string, any>> {
+    return await this.stockSystemDatasource.merge(user);
+  }
 }

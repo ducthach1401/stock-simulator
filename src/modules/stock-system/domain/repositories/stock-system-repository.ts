@@ -31,4 +31,6 @@ export abstract class StockSystemRepository {
   abstract totalStock(user: UserModel, code: string): Promise<number>;
 
   abstract delete(stock: StockModel): Promise<void>;
+
+  abstract merge(user: UserModel): Promise<Record<string, any>>;
 }

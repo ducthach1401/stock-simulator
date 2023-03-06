@@ -18,6 +18,7 @@ import { DeleteTransactionStockUsecase } from './domain/usecases/transactions/de
 import { GetTransactionStockByTransactionIdUsecase } from './domain/usecases/transactions/get-transaction-stock-by-transaction-id-usecase';
 import { GetTransactionStockUsecase } from './domain/usecases/transactions/get-transaction-stock-usecase';
 import { GetTransactionStocksUsecase } from './domain/usecases/transactions/get-transaction-stocks-usecase';
+import { MergeTransactionStocksUsecase } from './domain/usecases/transactions/merge-transaction-stocks-usecase';
 import { TotalStockVolumeUsecase } from './domain/usecases/transactions/total-stock-volume-usecase';
 import { UpdateTransactionStockUsecase } from './domain/usecases/transactions/update-transaction-stock-usecase';
 
@@ -47,6 +48,7 @@ import { UpdateTransactionStockUsecase } from './domain/usecases/transactions/up
     GetTransactionStockByTransactionIdUsecase,
     TotalStockVolumeUsecase,
     DeleteTransactionStockUsecase,
+    MergeTransactionStocksUsecase,
   ],
   exports: [
     GetStockUsecase,
@@ -55,6 +57,7 @@ import { UpdateTransactionStockUsecase } from './domain/usecases/transactions/up
     GetTransactionStockByTransactionIdUsecase,
     DeleteTransactionStockUsecase,
     TotalStockVolumeUsecase,
+    MergeTransactionStocksUsecase,
   ],
 })
 export class StockSystemModule {}

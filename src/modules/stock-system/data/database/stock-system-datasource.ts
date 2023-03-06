@@ -129,4 +129,27 @@ export class StockSystemDatasource {
       id: stock.id,
     });
   }
+
+  async merge(user: UserModel): Promise<Record<string, any>> {
+    const avgPrice: any[] = await this.stockRepository.query(
+      `SELECT code, ROUND(AVG(purchase_price)) AS purchase_price, MAX(created_at) AS created_at FROM stocks WHERE user_id='${
+        user.id
+      }' AND is_exists=${true} GROUP BY code;`,
+    );
+
+    const sumStocks = await this.stockRepository.query(
+      `SELECT code, SUM(volume) AS volume FROM stocks WHERE user_id='${user.id}'  GROUP BY code;`,
+    );
+
+    const mergeStock = sumStocks.map((stock: Record<string, any>) => {
+      const price = avgPrice.find((data) => data.code == stock.code);
+      stock.purchase_price = Number(price.purchase_price);
+      stock.volume = Number(stock.volume);
+      stock.total = stock.purchase_price * stock.volume;
+      stock.created_at = price.created_at;
+      return stock;
+    });
+
+    return mergeStock;
+  }
 }
