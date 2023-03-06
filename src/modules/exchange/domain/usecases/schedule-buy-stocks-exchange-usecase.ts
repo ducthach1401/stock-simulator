@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Interval } from '@nestjs/schedule';
 import { GetStockUsecase } from 'src/modules/stock-system/domain/usecases/get-stock-usecase';
+import { CreateTransactionStockUsecase } from 'src/modules/stock-system/domain/usecases/transactions/create-transaction-stock-usecase';
 import { AddBalanceUsecase } from 'src/modules/user/domain/usecases/admin/add-balance-usecase';
 import { GetUserUsecase } from 'src/modules/user/domain/usecases/user/get-user-usecase';
 import { ExchangeType } from '../enums/exchange-type';
@@ -15,6 +16,7 @@ export class ScheduleBuyStocksExchangeUsecase {
     private readonly markFinishedExchangeUsecase: MarkFinishedExchangeUsecase,
     private readonly addBalanceUsecase: AddBalanceUsecase,
     private readonly getUserUsecase: GetUserUsecase,
+    private readonly createTransactionStockUsecase: CreateTransactionStockUsecase,
   ) {}
 
   @Interval(3000)
@@ -32,15 +34,24 @@ export class ScheduleBuyStocksExchangeUsecase {
 
       const value = exchange.price - stock.purchase_price;
       if (value >= 0) {
+        const user = await this.getUserUsecase.call(exchange.userId, undefined);
+        if (!user) {
+          continue;
+        }
+
         await this.markFinishedExchangeUsecase.call(
           stock.purchase_price,
           exchange,
         );
 
-        const user = await this.getUserUsecase.call(exchange.userId, undefined);
-        if (!user) {
-          continue;
-        }
+        await this.createTransactionStockUsecase.call(
+          user,
+          exchange,
+          exchange.code,
+          exchange.volume,
+          stock.purchase_price,
+          true,
+        );
 
         await this.addBalanceUsecase.call(user, value * exchange.volume);
       }

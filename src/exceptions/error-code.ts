@@ -12,4 +12,5 @@ export enum ErrorCode {
 
   EXCHANGE_NOT_FOUND = '200|400',
   CODE_INVALID = '201|400',
+  EXCHANGE_INVALID = '202|400',
 }
