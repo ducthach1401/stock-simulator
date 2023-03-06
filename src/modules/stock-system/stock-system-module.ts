@@ -14,6 +14,7 @@ import { CollectSystemStockInSsiExchangeUsecase } from './domain/usecases/collec
 import { GetAllStocksUsecase } from './domain/usecases/get-all-stocks-usecase';
 import { GetStockUsecase } from './domain/usecases/get-stock-usecase';
 import { CreateTransactionStockUsecase } from './domain/usecases/transactions/create-transaction-stock-usecase';
+import { DeleteTransactionStockUsecase } from './domain/usecases/transactions/delete-transaction-stock-usecase';
 import { GetTransactionStockByTransactionIdUsecase } from './domain/usecases/transactions/get-transaction-stock-by-transaction-id-usecase';
 import { GetTransactionStockUsecase } from './domain/usecases/transactions/get-transaction-stock-usecase';
 import { GetTransactionStocksUsecase } from './domain/usecases/transactions/get-transaction-stocks-usecase';
@@ -45,12 +46,14 @@ import { UpdateTransactionStockUsecase } from './domain/usecases/transactions/up
     UpdateTransactionStockUsecase,
     GetTransactionStockByTransactionIdUsecase,
     TotalStockVolumeUsecase,
+    DeleteTransactionStockUsecase,
   ],
   exports: [
     GetStockUsecase,
     CreateTransactionStockUsecase,
     UpdateTransactionStockUsecase,
     GetTransactionStockByTransactionIdUsecase,
+    DeleteTransactionStockUsecase,
     TotalStockVolumeUsecase,
   ],
 })

@@ -63,4 +63,8 @@ export class StockSystemRepositoryImpl extends StockSystemRepository {
   async totalStock(user: UserModel, code: string): Promise<number> {
     return await this.stockSystemDatasource.totalStock(user, code);
   }
+
+  async delete(stock: StockModel): Promise<void> {
+    await this.stockSystemDatasource.delete(stock);
+  }
 }

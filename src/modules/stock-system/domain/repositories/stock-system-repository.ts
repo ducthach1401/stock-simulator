@@ -29,4 +29,6 @@ export abstract class StockSystemRepository {
   ): Promise<StockModel | undefined>;
 
   abstract totalStock(user: UserModel, code: string): Promise<number>;
+
+  abstract delete(stock: StockModel): Promise<void>;
 }

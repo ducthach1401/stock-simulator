@@ -123,4 +123,10 @@ export class StockSystemDatasource {
 
     return Number(total[0].sum);
   }
+
+  async delete(stock: StockModel): Promise<void> {
+    await this.stockRepository.delete({
+      id: stock.id,
+    });
+  }
 }
