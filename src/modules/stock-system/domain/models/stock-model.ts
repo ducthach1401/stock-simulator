@@ -8,7 +8,7 @@ export class StockModel extends DomainModel {
   public readonly transactionId: string;
   public readonly code: string;
   public readonly volume: number;
-  public readonly purchasePrice: number;
+  public readonly purchasePrice: number | undefined;
   public readonly isExists: boolean;
   public readonly createdAt: Date;
   public readonly updatedAt: Date;
@@ -21,7 +21,7 @@ export class StockModel extends DomainModel {
     transactionId: string,
     code: string,
     volume: number,
-    purchasePrice: number,
+    purchasePrice: number | undefined,
     isExists: boolean,
     createdAt: Date,
     updatedAt: Date,

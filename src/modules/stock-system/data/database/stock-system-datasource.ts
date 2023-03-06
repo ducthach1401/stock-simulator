@@ -138,7 +138,7 @@ export class StockSystemDatasource {
     );
 
     const sumStocks = await this.stockRepository.query(
-      `SELECT code, SUM(volume) AS volume FROM stocks WHERE user_id='${user.id}'  GROUP BY code;`,
+      `SELECT code, SUM(volume) AS volume FROM stocks WHERE user_id='${user.id}' GROUP BY code HAVING SUM(volume) > 0;`,
     );
 
     const mergeStock = sumStocks.map((stock: Record<string, any>) => {

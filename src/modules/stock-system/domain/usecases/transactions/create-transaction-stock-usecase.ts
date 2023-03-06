@@ -14,7 +14,7 @@ export class CreateTransactionStockUsecase {
     transaction: ExchangeModel,
     code: string,
     volume: number,
-    purchasePrice: number,
+    purchasePrice: number | undefined,
     isExists: boolean,
   ): Promise<void> {
     const stock = new StockModel(

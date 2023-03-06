@@ -72,7 +72,7 @@ export class CreateExchangeUsecase {
         model,
         code,
         -volume,
-        0,
+        undefined,
         false,
       );
     }

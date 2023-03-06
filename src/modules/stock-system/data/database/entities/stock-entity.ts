@@ -30,7 +30,7 @@ export class StockEntity {
   volume!: number;
 
   @Column()
-  purchase_price!: number;
+  purchase_price?: number;
 
   @Column()
   is_exists!: boolean;
