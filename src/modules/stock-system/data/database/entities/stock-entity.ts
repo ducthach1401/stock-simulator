@@ -8,20 +8,20 @@ import {
   JoinColumn,
   ManyToOne,
   OneToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('stocks')
 export class StockEntity {
-  @PrimaryColumn()
-  id!: string;
+  @PrimaryGeneratedColumn('increment')
+  id!: number;
 
   @Column()
-  user_id!: string;
+  user_id!: number;
 
   @Column()
-  transaction_id!: string;
+  transaction_id!: number;
 
   @Column()
   code!: string;

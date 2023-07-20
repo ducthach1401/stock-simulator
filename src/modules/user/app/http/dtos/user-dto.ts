@@ -82,8 +82,9 @@ export class UserListQuery {
 
 export class UserIdParam {
   @ApiProperty()
-  @IsString()
-  id!: string;
+  @Type(() => Number)
+  @IsNumber()
+  id!: number;
 }
 
 export class AdminIdParam extends PickType(UserIdParam, ['id']) {}

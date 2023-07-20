@@ -13,7 +13,7 @@ export class UserRepositoryImpl extends UserRepository {
   }
 
   async get(
-    id: string,
+    id: number,
     relations: string[] | undefined,
   ): Promise<UserModel | undefined> {
     return await this.userDatasource.get(id, relations);

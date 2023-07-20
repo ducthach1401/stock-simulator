@@ -46,5 +46,5 @@ export class GetMyStocksQueryDto extends IntersectionType(
 export class GetMyStockParamsDto {
   @ApiProperty()
   @IsString()
-  id!: string;
+  id!: number;
 }

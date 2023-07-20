@@ -4,7 +4,7 @@ import { ExchangeModel } from 'src/modules/exchange/domain/models/exchange-model
 
 export class UserModel extends DomainModel {
   @ApiProperty()
-  public readonly id: string;
+  public readonly id: number;
 
   @ApiProperty()
   public readonly name: string;
@@ -37,7 +37,7 @@ export class UserModel extends DomainModel {
   public readonly exchange: ExchangeModel[] | undefined;
 
   constructor(
-    id: string,
+    id: number,
     name: string,
     username: string,
     password: string,

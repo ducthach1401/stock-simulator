@@ -9,7 +9,7 @@ export class GetExchangeUsecase {
 
   async call(
     user: UserModel | undefined,
-    id: string,
+    id: number,
   ): Promise<ExchangeModel | undefined> {
     return await this.exchangeRepository.get(user, id);
   }

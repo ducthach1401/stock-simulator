@@ -12,7 +12,7 @@ export abstract class StockSystemRepository {
 
   abstract update(stock: StockModel, isExists: boolean): Promise<void>;
 
-  abstract get(id: string): Promise<StockModel | undefined>;
+  abstract get(id: number): Promise<StockModel | undefined>;
 
   abstract list(
     user: UserModel | undefined,
@@ -25,7 +25,7 @@ export abstract class StockSystemRepository {
   ): Promise<PageList<StockModel>>;
 
   abstract getByTransactionId(
-    transactionId: string,
+    transactionId: number,
   ): Promise<StockModel | undefined>;
 
   abstract totalStock(user: UserModel, code: string): Promise<number>;

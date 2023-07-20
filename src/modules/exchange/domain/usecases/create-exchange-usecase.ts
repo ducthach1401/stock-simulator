@@ -3,13 +3,13 @@ import { UserModel } from 'src/modules/user/domain/models/user-model';
 import { ExchangeType } from '../enums/exchange-type';
 import { ExchangeModel } from '../models/exchange-model';
 import { ExchangeRepository } from '../repositories/exchange-repository';
-import { v4 as uuidv4 } from 'uuid';
 import { GetStockUsecase } from 'src/modules/stock-system/domain/usecases/get-stock-usecase';
 import { LogicalException } from 'src/exceptions/logical-exception';
 import { ErrorCode } from 'src/exceptions/error-code';
 import { SubtractBalanceUsecase } from 'src/modules/user/domain/usecases/admin/subtract-balance-usecase';
 import { TotalStockVolumeUsecase } from 'src/modules/stock-system/domain/usecases/transactions/total-stock-volume-usecase';
 import { CreateTransactionStockUsecase } from 'src/modules/stock-system/domain/usecases/transactions/create-transaction-stock-usecase';
+import { DEFAULT_ID } from 'src/core/constants';
 
 @Injectable()
 export class CreateExchangeUsecase {
@@ -51,7 +51,7 @@ export class CreateExchangeUsecase {
     }
 
     const model = new ExchangeModel(
-      uuidv4(),
+      DEFAULT_ID,
       user.id,
       code,
       volume,

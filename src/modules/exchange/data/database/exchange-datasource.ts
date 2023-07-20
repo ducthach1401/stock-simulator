@@ -26,7 +26,7 @@ export class ExchangeDatasource {
 
   async get(
     user: UserModel | undefined,
-    id: string,
+    id: number,
   ): Promise<ExchangeModel | undefined> {
     const conditions: FindOptionsWhere<ExchangeEntity> = {
       id: id,

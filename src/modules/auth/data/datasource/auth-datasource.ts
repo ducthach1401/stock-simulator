@@ -14,7 +14,6 @@ export class AuthDatasource {
 
   async create(authToken: AuthTokensModel): Promise<void> {
     const entity = new AuthTokensEntity();
-    entity.id = authToken.id;
     entity.user_id = authToken.userId;
     entity.token = authToken.token;
     entity.created_at = authToken.createdAt;

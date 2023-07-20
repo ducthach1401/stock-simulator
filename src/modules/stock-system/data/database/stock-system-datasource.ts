@@ -21,7 +21,7 @@ export class StockSystemDatasource {
     private readonly stockRepository: Repository<StockEntity>,
   ) {}
 
-  async get(id: string): Promise<StockModel | undefined> {
+  async get(id: number): Promise<StockModel | undefined> {
     return (
       await this.stockRepository.findOne({
         where: {
@@ -105,7 +105,7 @@ export class StockSystemDatasource {
   }
 
   async getByTransactionId(
-    transactionId: string,
+    transactionId: number,
   ): Promise<StockModel | undefined> {
     return (
       await this.stockRepository.findOne({

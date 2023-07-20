@@ -3,9 +3,9 @@ import { ExchangeModel } from 'src/modules/exchange/domain/models/exchange-model
 import { UserModel } from 'src/modules/user/domain/models/user-model';
 
 export class StockModel extends DomainModel {
-  public readonly id: string;
-  public readonly userId: string;
-  public readonly transactionId: string;
+  public readonly id: number;
+  public readonly userId: number;
+  public readonly transactionId: number;
   public readonly code: string;
   public readonly volume: number;
   public readonly purchasePrice: number | undefined;
@@ -16,9 +16,9 @@ export class StockModel extends DomainModel {
   public readonly transaction: ExchangeModel | undefined;
 
   constructor(
-    id: string,
-    userId: string,
-    transactionId: string,
+    id: number,
+    userId: number,
+    transactionId: number,
     code: string,
     volume: number,
     purchasePrice: number | undefined,

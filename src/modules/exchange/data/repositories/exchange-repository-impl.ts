@@ -16,7 +16,7 @@ export class ExchangeRepositoryImpl extends ExchangeRepository {
 
   async get(
     user: UserModel | undefined,
-    id: string,
+    id: number,
   ): Promise<ExchangeModel | undefined> {
     return await this.exchangeDatasource.get(user, id);
   }

@@ -3,17 +3,17 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('auth_tokens')
 export class AuthTokensEntity {
-  @PrimaryColumn()
-  id!: string;
+  @PrimaryGeneratedColumn('increment')
+  id!: number;
 
   @Column()
-  user_id!: string;
+  user_id!: number;
 
   @Column()
   token!: string;

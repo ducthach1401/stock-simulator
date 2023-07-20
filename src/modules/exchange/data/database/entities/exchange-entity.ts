@@ -7,17 +7,17 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('exchange')
 export class ExchangeEntity {
-  @PrimaryColumn()
-  id!: string;
+  @PrimaryGeneratedColumn('increment')
+  id!: number;
 
   @Column()
-  user_id!: string;
+  user_id!: number;
 
   @Column()
   code!: string;

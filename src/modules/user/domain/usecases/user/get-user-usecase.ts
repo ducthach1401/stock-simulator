@@ -7,7 +7,7 @@ export class GetUserUsecase {
   constructor(private readonly userRepository: UserRepository) {}
 
   async call(
-    id: string,
+    id: number,
     relations: string[] | undefined,
   ): Promise<UserModel | undefined> {
     return await this.userRepository.get(id, relations);

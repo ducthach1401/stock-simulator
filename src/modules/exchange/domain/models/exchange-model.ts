@@ -5,10 +5,10 @@ import { ExchangeType } from '../enums/exchange-type';
 
 export class ExchangeModel extends DomainModel {
   @ApiProperty()
-  public readonly id: string;
+  public readonly id: number;
 
   @ApiProperty({ name: 'user_id' })
-  public readonly userId: string;
+  public readonly userId: number;
 
   @ApiProperty()
   public readonly code: string;
@@ -38,8 +38,8 @@ export class ExchangeModel extends DomainModel {
   public readonly user: UserModel | undefined;
 
   constructor(
-    id: string,
-    userId: string,
+    id: number,
+    userId: number,
     code: string,
     volume: number,
     price: number,

@@ -20,7 +20,7 @@ import { ExchangeType } from 'src/modules/exchange/domain/enums/exchange-type';
 export class ExchangeIdParam {
   @ApiProperty()
   @IsString()
-  id!: string;
+  id!: number;
 }
 
 export class ListExchangeQueryDto extends IntersectionType(

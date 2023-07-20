@@ -16,7 +16,7 @@ export class UserDatasource {
   ) {}
 
   async get(
-    id: string,
+    id: number,
     relations: string[] | undefined,
   ): Promise<UserModel | undefined> {
     const user = await this.userRepository.findOne({

@@ -5,7 +5,7 @@ import { UserModel } from '../models/user-model';
 
 export abstract class UserRepository {
   abstract get(
-    id: string,
+    id: number,
     relations: string[] | undefined,
   ): Promise<UserModel | undefined>;
 

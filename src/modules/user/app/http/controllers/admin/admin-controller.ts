@@ -27,7 +27,7 @@ export class AdminController {
     private readonly deleteUserUsecase: DeleteUserUsecase,
   ) {}
 
-  private async checkAdmin(id: string): Promise<void> {
+  private async checkAdmin(id: number): Promise<void> {
     const admin = await this.getUserUsecase.call(id, undefined);
 
     if (!admin) {

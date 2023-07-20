@@ -6,7 +6,7 @@ import { StockSystemRepository } from '../../repositories/stock-system-repositor
 export class GetTransactionStockByTransactionIdUsecase {
   constructor(private readonly stockSystemRepository: StockSystemRepository) {}
 
-  async call(transactionId: string): Promise<StockModel | undefined> {
+  async call(transactionId: number): Promise<StockModel | undefined> {
     return await this.stockSystemRepository.getByTransactionId(transactionId);
   }
 }

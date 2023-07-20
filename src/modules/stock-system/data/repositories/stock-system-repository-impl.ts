@@ -22,7 +22,7 @@ export class StockSystemRepositoryImpl extends StockSystemRepository {
     return await this.stockSystemService.collectStockInSsiExchange();
   }
 
-  async get(id: string): Promise<StockModel | undefined> {
+  async get(id: number): Promise<StockModel | undefined> {
     return await this.stockSystemDatasource.get(id);
   }
 
@@ -55,7 +55,7 @@ export class StockSystemRepositoryImpl extends StockSystemRepository {
   }
 
   async getByTransactionId(
-    transactionId: string,
+    transactionId: number,
   ): Promise<StockModel | undefined> {
     return await this.stockSystemDatasource.getByTransactionId(transactionId);
   }

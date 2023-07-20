@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { v4 as uuidv4 } from 'uuid';
 import * as bcrypt from 'bcrypt';
 import { UserRepository } from '../../repositories/user-repository';
 import { UserModel } from '../../models/user-model';
 import { DefaultConfig } from '../../enums/default-config';
+import { DEFAULT_ID } from 'src/core/constants';
 
 @Injectable()
 export class RegisterUserUsecase {
@@ -15,7 +15,7 @@ export class RegisterUserUsecase {
     password: string,
   ): Promise<boolean> {
     const model = new UserModel(
-      uuidv4(),
+      DEFAULT_ID,
       name,
       username,
       bcrypt.hashSync(password, 10),

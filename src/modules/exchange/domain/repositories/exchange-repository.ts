@@ -8,7 +8,7 @@ import { ExchangeModel } from '../models/exchange-model';
 export abstract class ExchangeRepository {
   abstract get(
     user: UserModel | undefined,
-    id: string,
+    id: number,
   ): Promise<ExchangeModel | undefined>;
 
   abstract getAll(
