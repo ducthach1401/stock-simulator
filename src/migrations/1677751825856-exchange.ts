@@ -13,14 +13,14 @@ export class exchange1677751825856 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'serial',
+            type: 'int',
             isPrimary: true,
             isGenerated: true,
             generationStrategy: 'increment',
           },
           {
             name: 'user_id',
-            type: 'varchar',
+            type: 'int',
           },
           {
             name: 'code',

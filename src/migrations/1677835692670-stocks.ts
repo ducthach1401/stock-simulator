@@ -13,18 +13,18 @@ export class stocks1677835692670 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'serial',
+            type: 'int',
             isPrimary: true,
             isGenerated: true,
             generationStrategy: 'increment',
           },
           {
             name: 'user_id',
-            type: 'varchar',
+            type: 'int',
           },
           {
             name: 'transaction_id',
-            type: 'varchar',
+            type: 'int',
           },
           {
             name: 'code',

@@ -13,14 +13,14 @@ export class authTokens1663749229712 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'serial',
+            type: 'int',
             isPrimary: true,
             isGenerated: true,
             generationStrategy: 'increment',
           },
           {
             name: 'user_id',
-            type: 'varchar',
+            type: 'int',
           },
           {
             name: 'token',
