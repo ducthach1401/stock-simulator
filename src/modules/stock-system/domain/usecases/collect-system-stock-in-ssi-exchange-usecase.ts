@@ -17,6 +17,7 @@ export class CollectSystemStockInSsiExchangeUsecase {
       'all_stock',
       stocks.map((stock) => normalizeResponseData(stock)),
     );
+
     for (const stock of stocks) {
       await this.cacheManager.set(stock.code, normalizeResponseData(stock));
     }

@@ -13,9 +13,25 @@ import { StockSystemModule } from '../stock-system/stock-system-module';
 import { UserModule } from '../user/user-module';
 import { AppController } from './app-controller';
 import { AppService } from './app-service';
+import { OgmaInterceptor, OgmaModule } from '@ogma/nestjs-module';
+import { ExpressParser } from '@ogma/platform-express';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [
+    OgmaModule.forRoot({
+      service: {
+        color: true,
+        json: false,
+        application: 'NestJS',
+      },
+      interceptor: {
+        http: ExpressParser,
+        ws: false,
+        gql: false,
+        rpc: false,
+      },
+    } as any),
     ConfigModule.forRoot({
       load: [app, swagger, redis, database],
     }),
@@ -49,6 +65,10 @@ import { AppService } from './app-service';
     {
       provide: 'APP_GUARD',
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: OgmaInterceptor,
     },
   ],
 })
